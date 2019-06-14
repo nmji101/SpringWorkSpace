@@ -119,4 +119,9 @@ Servers/
 .classpath
 
 MANIFEST.MF
+<<<<<<< HEAD
 /bin/
+=======
+/bin/
+
+>>>>>>> bcb8c47374fe30447308dc35130dad49518499a2
