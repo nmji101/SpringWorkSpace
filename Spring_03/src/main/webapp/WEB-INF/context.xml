@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 스프링에 필요한기능 -->
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<!-- handler mapper -->
+		<!-- setter를 통해 셋팅하기 -->
+		<property name="mappings">
+			<props>
+				<!-- mappings는 properties 컬렉션 사용함. 그래서 props로 값 넣어줌 -->
+				<prop key="/">index</prop>
+				<!-- <prop key="/">index</prop> 라고 적으면 맨처음페이지로 접속하면 id=index인 IndexController으로 
+					보낸다 -->
+				<prop key="inputForm.do">inputForm</prop>
+				<prop key="inputProc.do">inputProc</prop>
+				<prop key="outputProc.do">outputProc</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<bean id="index" class="kh.spring.practice.IndexController" />
+	<bean id="inputForm"
+		class="kh.spring.practice.InputFormController" />
+	<bean id="inputProc"
+		class="kh.spring.practice.InputProcController" />
+		<bean id="outputProc"
+		class="kh.spring.practice.OutputProcController" />
+
+	<bean id="dateSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="kh"></property>
+		<property name="password" value="kh"></property>
+		<property name="defaultAutoCommit" value="false"></property>
+		<!-- defalut오토커밋이 default로 true로 되어있어서 con.commit을 하면 오류가 나버린다. 그래서 false설정 
+			추가해주기! -->
+<!-- 			 autowire="byType" -->
+	</bean>
+	<context:component-scan base-package="kh.spring"></context:component-scan>
+	
+	<!-- img태그사용시에 경로 정해주기 -->
+	<!-- namespaces에서 mvc체크후에
+		 location="이쪽에서 검색해서 사용해라 " mapping="이러한 형태로 들어온다면"
+		 /resources/** : resources로 들어오는 모든 요청
+	 -->
+	<mvc:resources location="/resources/image/" mapping="/image/**"></mvc:resources>
+	<mvc:resources location="/resources/css/" mapping="/css/**"></mvc:resources>
+
+
+</beans>

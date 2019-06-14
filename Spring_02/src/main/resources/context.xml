@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="kh.spring"></context:component-scan>
+<!-- 	base-package="kh.spring": kh.spring로 시작하는 모든패키지들을 검사한다. -->
+<!--  스프링컨테이너를 가동하면, 해당 패키지들을 검사한후 @Component annotation을 갖고있는 클래스들만 인스턴스로 만든다. -->
+</beans>

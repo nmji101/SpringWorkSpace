@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sony" class="kh.spring.impl.SonySpeaker"></bean>
+	<bean id="britz" class="kh.spring.impl.BritzSpeaker"></bean>
+	<!-- 1.생성자를 통한 DI -->
+	<!-- <bean id="sam" class="kh.spring.impl.SamsungTv"> -->
+	<!-- <constructor-arg ref="britz"></constructor-arg> -->
+	<!-- 이렇게 인스턴스를 다른클래스에 넣어줄때 , DI라고 한다 (dependecy injection) -->
+	<!-- <constructor-arg value="sams-1000"></constructor-arg> -->
+	<!-- <constructor-arg value="1000"></constructor-arg> -->
+	<!-- <constructor-arg value="false"></constructor-arg> -->
+	<!-- String과 기본자료형 8가지는 value attribute 를 사용하고, 나머지 참조자료형은 ref attribute를 
+		사용한다. -->
+	<!-- </bean> -->
+
+
+	<!-- <bean id="lg" class="kh.spring.impl.LgTv" ></bean> : 이렇게 적으면 default 
+		생성자로 instance생성하는것 -->
+	<!-- 이곳에<bean class=""></bean>를 써놓으면 main을 실행했을때, spring 프로그램이 가동된다면 spring 
+		framework 가 이 xml 파일들을 읽어서 인스턴스를 만들어준다 -->
+	<!-- spring 가동될때 만들어질 인스턴스들 -> spring container가 인스턴스를 제어하고있다 -->
+
+	<!-- 2.setter를 통한 DI -->
+	<!-- setter를 사용할때 property라고 쓴다. -->
+	
+	<!-- 		lazy-init attribute -->
+	<!-- lazy-init="false" 가 defalut이다 . 스프링컨테이너 가동과 동시에 만든다. 
+		lazy-init="true"라면 해당 bean을 부를때 해당 instance를 만든다.-->
+		<!-- lazy-init="true"로 해놓으면, 시작할때는 instance를 안만들기때문에 가동속도는 빨라지지만 해당 class가 만들어질때, 반응속도가 느려진다
+		그래서 해당프로그램을 만들때 필수로 쓰일기능이라면 lazy-init="false"로 설정해놓고 쓸수도있고 안쓸수도있는 (희귀하게 쓰일듯한 기능들)기능들만 true로 걸어두는게 좋다. -->
+<!-- 		scope attribute -->
+<!-- 지역변수의 느낌이아니라 해당인스턴스를 하나로 사용하는지, 아니면 부를때마다 계속 인스턴스를 생성하는것인지 -->
+<!--  scope="singleton"가 default. getBean할때, 해당인스턴스 하나로만 사용 -->
+<!--  scope= "prototype" 부를때마다 계속 인스턴스를 생성-->
+<!--  DAO 들은 singleton 인것이 좋다 .  기록해야하는것들은 prototype으로 사용하기.-->
+	<bean id="sam" class="kh.spring.impl.SamsungTv" lazy-init="false" scope="prototype">
+		<property name="speaker" ref="sony"></property>
+		<property name="model" value="sams-1000" />
+		<property name="price" value="1000" />
+		<property name="power" value="false" />
+	</bean>
+
+<!-- 	<bean id="friuts" class="kh.spring.impl.Friuts"> -->
+<!-- 	<constructor-arg> -->
+<!-- 		<list> -->
+<!-- 			<value>apple1</value> -->
+<!-- 			<value>orange1</value> -->
+<!-- 			<value>grape1</value> -->
+<!-- 		</list> -->
+<!-- 	</constructor-arg> -->
+<!-- 	<constructor-arg> -->
+<!-- 		<set> -->
+<!-- 			<value>apple2</value> -->
+<!-- 			<value>orange2</value> -->
+<!-- 			<value>grape2</value> -->
+<!-- 		</set> -->
+<!-- 	</constructor-arg> -->
+<!-- 	<constructor-arg> -->
+<!-- 		<map> -->
+<!-- 			<entry> -->
+<!-- 				<key> -->
+<!-- 					<value>apple</value> -->
+<!-- 				</key> -->
+<!-- 				<value>3</value> -->
+<!-- 			</entry> -->
+<!-- 			<entry> -->
+<!-- 				<key> -->
+<!-- 					<value>orange</value> -->
+<!-- 				</key> -->
+<!-- 				<value>3</value> -->
+<!-- 			</entry> -->
+<!-- 			<entry key="grape" value="3" /> -->
+<!-- 		</map> -->
+<!-- 	</constructor-arg> -->
+	
+<!-- </bean> -->
+
+	<bean id="friuts" class="kh.spring.impl.Friuts">
+		<property name="namesList">
+			<list>
+				<value>apple1</value>
+				<value>orange1</value>
+				<value>grape1</value>
+			</list>
+		</property>
+		<property name="namesSet">
+			<set>
+				<value>apple2</value>
+				<value>orange2</value>
+				<value>grape2</value>
+			</set>
+		</property>
+		<property name="namesMap">
+			<map>
+				<entry key="apple" value="3" />
+				<entry key="orange" value="3" />
+				<entry key="grape" value="3" />
+			</map>
+		</property>
+	</bean>
+</beans>
