@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 클라이언트 -> 서버 -> 디스패처 -> 핸들러맵퍼 -> 컨트롤러의 종류알려줌 -> 디스패처가 해당컨트롤러에게 처리해달라고 
+		요청-> (컨트롤러 -> DAO -> DB) -> -->
+	<!-- 결과를 다시 디스패처에게 돌려줌 -> (디스패처가 view resolver를 쓸수도있고 안쓸수도있음) view resolver는 
+		url을...쉽게 변환해주는??? -->
+	<!-- 2.5버전 이후에 어노테이션 방법이 도입되었음 -->
+	<!-- handler mapper도 xml로 만들지말고 어노테이션으로 request를 맵핑할수있게 바뀌었다. -> request 
+		mapper라고한다. -->
+	<context:component-scan base-package="kh.spring"></context:component-scan>
+
+	<!-- view resolver 만들기 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property> <!-- 접두사 -->
+		<property name="suffix" value=".jsp"></property>			<!-- 접미사 -->
+	</bean>
+	<!-- view resolver를 만들어 셋팅하는 순간부터 모든 controller의 return 값에 자동으로 접두사,접미사가 
+		붙어서 작동한다. 따로 view resolver를 사용한다고 선언하는것이 없다. -->
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="kh"></property>
+		<property name="password" value="kh"></property>
+		<property name="defaultAutoCommit" value="false"></property>
+		<!-- defalut오토커밋이 default로 true로 되어있어서 con.commit을 하면 오류가 나버린다. 그래서 false설정 
+			추가해주기! -->
+		<!-- autowire="byType" -->
+	</bean>
+</beans>

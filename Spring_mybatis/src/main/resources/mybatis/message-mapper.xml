@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MessageDAO">
+	<insert id="insert">
+		insert into message values(message_seq.nextval,#{name},#{msg})
+	</insert>
+	<delete id="delete">
+		delete from message where seq=#{value}
+	</delete>
+	<select id="selectList" resultType="kh.spring.dto.MessageDTO">
+		select * from message
+	</select>
+	<select id="selectBySeq" resultType="kh.spring.dto.MessageDTO">
+		select * from message where seq=#{value}
+	</select>
+	<update id="update">
+		update message set msg =#{msg} where seq =#{seq}
+	</update>
+	<!--만약 table 컬럼명과 내가만든 dto의 member field명이 다를때 -->
+	<resultMap type="kh.spring.dto.TempDTO" id="TempDTO">
+		<result property="num" column="seq"></result>
+		<result property="id" column="name"></result>
+		<result property="contents" column="msg"></result>
+	</resultMap>
+	<select id="selectByTempDTO" resultMap="TempDTO">
+		select * from message where seq=#{num}
+	</select>
+</mapper>

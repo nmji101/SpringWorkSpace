@@ -27,7 +27,7 @@
 	<!-- setter를 사용할때 property라고 쓴다. -->
 	
 	<!-- 		lazy-init attribute -->
-	<!-- lazy-init="false" 가 defalut이다 . 스프링컨테이너 가동과 동시에 만든다. 
+	<!-- lazy-init="false" 가 default이다 . 스프링컨테이너 가동과 동시에 만든다. 
 		lazy-init="true"라면 해당 bean을 부를때 해당 instance를 만든다.-->
 		<!-- lazy-init="true"로 해놓으면, 시작할때는 instance를 안만들기때문에 가동속도는 빨라지지만 해당 class가 만들어질때, 반응속도가 느려진다
 		그래서 해당프로그램을 만들때 필수로 쓰일기능이라면 lazy-init="false"로 설정해놓고 쓸수도있고 안쓸수도있는 (희귀하게 쓰일듯한 기능들)기능들만 true로 걸어두는게 좋다. -->
@@ -101,4 +101,7 @@
 			</map>
 		</property>
 	</bean>
+<!-- 	Set : 집합(중복된 원소를 가지지 않는)을 나타내는 자료 구조. 순서는 따로 없다. -->
+<!-- 	List : 순서가 있는 자료 구조로 중복된 원소를 가질 수 있다 / -->
+
 </beans>

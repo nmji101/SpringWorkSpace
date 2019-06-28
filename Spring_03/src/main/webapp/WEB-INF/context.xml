@@ -35,7 +35,7 @@
 		<bean id="outputProc"
 		class="kh.spring.practice.OutputProcController" />
 
-	<bean id="dateSource"
+	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver"></property>
