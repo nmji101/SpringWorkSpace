@@ -2,11 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
-	
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kh.spring</groupId>
-	<artifactId>batis</artifactId>
-	<name>Spring_mybatis</name>
+	<artifactId>stomp</artifactId>
+	<name>Spring_WebSocket</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -15,12 +14,6 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-	<repositories><!-- maven 저장소 추가해주기 -->
-		<repository>
-			<id>oracle</id>
-			<url>http://maven.jahia.org/maven2</url>
-		</repository>
-	</repositories>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -40,37 +33,6 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!--  spring jdbc -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<!-- JDBC & DBCP -->
-		<dependency>
-			<groupId>com.oracle</groupId><!-- 폴더 -->
-			<artifactId>ojdbc6</artifactId><!--라이브러리 이름 -->
-			<version>12.1.0.2</version><!--라이브러리 버전 -->
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<!-- mybatis 자체가 제공하는기능과 클래스 -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.2.2</version>
-		</dependency>
-		
-		<!-- 스프링프레임워크와 mybatis를 연동하는 모듈 -->
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.0</version>
-		</dependency>
 
 		<!-- AspectJ -->
 		<dependency>
@@ -78,6 +40,40 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
+		<!-- Spring WebSocket -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.0.6.RELEASE</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>5.0.6.RELEASE</version>
+		</dependency>
+		<!-- Jackson : gson이랑 같은 역할의 다른 라이브러리/ 동적바인딩이 가능하다.(Type바인딩) -->
+		<!-- json형 value를 자동으로 dto로 바꿔주는 ,,, / @responseBody 붙이고 dto를 return 하면 
+			알아서 json형태로 리턴하기도 한다 -->
+		<!-- 스프링 웹소켓 라이브러리가 Jackson을 사용하기 때문에,, 스프링 웹소켓이 Jackson에 의존관계가있다. 그래서 
+			추가해주지않으면 에러난다. -->
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.9</version>
+		</dependency>
+
+
 
 		<!-- Logging -->
 		<dependency>
